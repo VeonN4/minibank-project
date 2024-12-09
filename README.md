@@ -39,7 +39,7 @@ Before you can really run it. You need to modify the .env file first. to do that
 2. Open the file and change the `MONGODB_ADDRESS` to your own MongoDB database.
 
 >[!NOTE]
->The `MONGODB_USER' and `MONGODB_PASSWORD' are for **Docker Compose**. If you don't use them, just ignore them.
+>The `MONGODB_USER` and `MONGODB_PASSWORD` are for **Docker Compose**. If you don't use them, just ignore them.
 
 ### 4. Running the script
 
