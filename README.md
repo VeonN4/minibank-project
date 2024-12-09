@@ -17,7 +17,7 @@ First, you need to create a virtual environment. Why is this important? Because 
 You can simply type the following command to create the virtual 
 
 ```
-python -m venv [name of virtual environment].
+python -m venv [virtual environment name].
 ```
 
 ### 2. Installation Requirements
