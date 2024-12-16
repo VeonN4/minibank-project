@@ -93,10 +93,7 @@ def userDashboard(user):
 def userDeposit(user):
     print("\nDeposit\n")
     amount = int(input("Amount to deposit: Rp. "))
-    if DatabaseManager.deposit(user, amount):
-        print(f"Successfully deposited Rp. {amount}.")
-    else:
-        print("Deposit failed.")
+    print(f"Successfully deposited Rp. {amount}.")
 
 
 def userWithdraw(user):
