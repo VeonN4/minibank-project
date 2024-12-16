@@ -1,6 +1,7 @@
 from database import DatabaseManager
 from database import userHandler
 import dotenv
+import os
 
 connection = dotenv.get_key(".env", "MONGODB_ADDRESS")
 client = DatabaseManager.initialize(connection)
@@ -12,6 +13,7 @@ MENU_OPTIONS = {
 
 
 def menu():
+    os.system("clear")
     print("\nVeonise Minibank\n")
     for i, option in enumerate(MENU_OPTIONS["menu"], start=1):
         print(f"{i}. {option}")
@@ -49,6 +51,7 @@ def choiceHandler(choice: int, loc: str, user=None):
 
 def loginPrompt():
     while True:
+        os.system("clear")
         print("Login\n")
         user = input("Enter your name: ")
         pin = int(input("Enter your pin: "))
@@ -62,6 +65,7 @@ def loginPrompt():
 
 def register_prompt():
     while True:
+        os.system("clear")
         print("\nRegister")
         user = input("Enter your name: ")
         pin = int(input("Enter your pin: "))
@@ -81,6 +85,7 @@ def userDashboard(user):
     choice = 0
 
     while choice != 5:
+        os.system("clear")
         print("\nDashboard Menu")
         print("Current Balance:", userHandler.get_user(user)["money"])
         for i, option in enumerate(MENU_OPTIONS["dashboard"], start=1):
@@ -91,12 +96,14 @@ def userDashboard(user):
 
 
 def userDeposit(user):
+    os.system("clear")
     print("\nDeposit\n")
     amount = int(input("Amount to deposit: Rp. "))
     print(f"Successfully deposited Rp. {amount}.")
 
 
 def userWithdraw(user):
+    os.system("clear")
     print("\nWithdraw\n")
     amount = int(input("Amount to withdraw: Rp. "))
     if DatabaseManager.withdraw(user, amount):
@@ -106,6 +113,7 @@ def userWithdraw(user):
 
 
 def userChangePIN(user):
+    os.system("clear")
     print("\nChange PIN\n")
     current_pin = userHandler.get_user(user)["pin"]
     print(
@@ -125,6 +133,7 @@ def userChangePIN(user):
 
 
 def userTransfer(user):
+    os.system("clear")
     print("\nTransfer")
     transferTo = input("Enter recipient's name (must match exactly): ")
     amount = int(input("Amount to transfer: Rp. "))
