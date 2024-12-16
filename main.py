@@ -7,16 +7,18 @@ client = DatabaseManager.initialize(connection)
 
 MENU_OPTIONS = {
     "menu": ["Login", "Register"],
-    "dashboard": ["Transfer", "Deposit", "Withdraw", "Change PIN", "Exit"]
+    "dashboard": ["Transfer", "Deposit", "Withdraw", "Change PIN", "Exit"],
 }
+
 
 def menu():
     print("\nVeonise Minibank\n")
     for i, option in enumerate(MENU_OPTIONS["menu"], start=1):
         print(f"{i}. {option}")
-    
+
     choice = int(input("Enter your choice (1/2): "))
     choiceHandler(choice, "menu")
+
 
 def choiceHandler(choice: int, loc: str, user=None):
     match loc:
@@ -44,17 +46,19 @@ def choiceHandler(choice: int, loc: str, user=None):
                     if user:
                         userDashboard(user)
 
+
 def loginPrompt():
     while True:
         print("Login\n")
         user = input("Enter your name: ")
         pin = int(input("Enter your pin: "))
 
-        if userHandler.validateUser (user, pin) == 1:
+        if userHandler.validateUser(user, pin) == 1:
             print(f"Welcome, {user}!")
             return user
         else:
             print("Wrong username or PIN!")
+
 
 def register_prompt():
     while True:
@@ -65,24 +69,26 @@ def register_prompt():
 
         if pin != confirm_pin:
             print("PINs do not match! Please try again.")
-        elif pin < 1000 or len(pin) > 9999:
+        elif pin < 1000 or pin > 9999:
             print("PINs should be 4 digits")
         else:
             userHandler.create_user(user, pin)
             print("Registration successful!")
             return user
 
+
 def userDashboard(user):
     choice = 0
 
     while choice != 5:
-        print("\nDashboard Menu")   
+        print("\nDashboard Menu")
         print("Current Balance:", userHandler.get_user(user)["money"])
         for i, option in enumerate(MENU_OPTIONS["dashboard"], start=1):
             print(f"{i}. {option}")
-        
+
         choice = int(input("Menu (1/2/3/4/5): "))
         choiceHandler(choice, "dashboard", user)
+
 
 def userDeposit(user):
     print("\nDeposit\n")
@@ -92,6 +98,7 @@ def userDeposit(user):
     else:
         print("Deposit failed.")
 
+
 def userWithdraw(user):
     print("\nWithdraw\n")
     amount = int(input("Amount to withdraw: Rp. "))
@@ -100,10 +107,13 @@ def userWithdraw(user):
     else:
         print("Withdrawal failed.")
 
+
 def userChangePIN(user):
     print("\nChange PIN\n")
     current_pin = userHandler.get_user(user)["pin"]
-    print("Current PIN:", current_pin)  # Do not display the current PIN for security reasons
+    print(
+        "Current PIN:", current_pin
+    )  # Do not display the current PIN for security reasons
 
     while True:
         newPIN = int(input("New PIN: "))
@@ -116,12 +126,14 @@ def userChangePIN(user):
             print("PIN changed successfully!")
             break
 
+
 def userTransfer(user):
     print("\nTransfer")
     transferTo = input("Enter recipient's name (must match exactly): ")
     amount = int(input("Amount to transfer: Rp. "))
 
     DatabaseManager.transfer(user, transferTo, amount)
+
 
 if __name__ == "__main__":
     try:
